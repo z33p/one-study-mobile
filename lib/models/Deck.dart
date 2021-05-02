@@ -1,7 +1,7 @@
-import 'package:one_study_mobile/core/models/model.dart';
+import 'package:one_study_mobile/models/shared/entity.dart';
 import 'package:sqflite/sqflite.dart';
 
-class Deck extends Model {
+class Deck extends Entity {
   int? deckId;
 
   final String title;
@@ -29,20 +29,20 @@ class Deck extends Model {
         $idColumn INTEGER PRIMARY KEY
         , $titleColumn TEXT
         , $descriptionColumn TEXT
-        ${Model.createModelColumnsSql}
+        ${Entity.createModelColumnsSql}
       )
     """);
   }
 
   static Deck fromMap(Map<String, dynamic> deckMap) {
-    var model = Model.fromMap(deckMap);
+    var entity = Entity.fromMap(deckMap);
 
     var deck = Deck(
         deckId: deckMap[idColumn],
         title: deckMap[titleColumn],
         description: deckMap[descriptionColumn],
-        createdAt: model.createdAt,
-        updatedAt: model.updatedAt);
+        createdAt: entity.createdAt,
+        updatedAt: entity.updatedAt);
 
     return deck;
   }
