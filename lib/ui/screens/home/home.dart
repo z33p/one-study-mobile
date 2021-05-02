@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_study_mobile/ui/screens/home/widgets/DynamicFloatingActionButton.dart';
+import 'package:one_study_mobile/ui/screens/home/widgets/speed_dial_floating_button.dart';
 import 'package:one_study_mobile/ui/screens/list_flashcards/list_flashcards.dart';
 import 'package:one_study_mobile/ui/screens/play_flashcards.dart';
 import 'package:one_study_mobile/ui/screens/settings.dart';
@@ -15,14 +15,17 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 1;
-  late List<Widget> listScreens;
 
-  bool isVisibleFloatingButton = true;
+  late List<Widget> listScreens;
+  late bool isVisibleFloatingButton;
+  late ValueNotifier<bool> isDialOpen;
 
   @override
   void initState() {
     super.initState();
     listScreens = [ListFlashCards(), PlayFlashCards(), SettingsScreen()];
+    isVisibleFloatingButton = false;
+    isDialOpen = ValueNotifier(false);
   }
 
   @override
@@ -32,7 +35,9 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(widget.title),
       ),
       body: listScreens[currentIndex],
-      floatingActionButton: renderDynamicFloatingActionButton(),
+      floatingActionButton: SpeedDialFloatingButton(
+        visible: isVisibleFloatingButton, isDialOpen: isDialOpen
+      ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) => changeScreenBottomNavigation(index),
         currentIndex: currentIndex,
@@ -55,15 +60,11 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  DynamicFloatingActionButton? renderDynamicFloatingActionButton() {
-    if (isVisibleFloatingButton) return DynamicFloatingActionButton();
-
-    return null;
-  }
-
   void changeScreenBottomNavigation(int index) {
     setState(
       () => {currentIndex = index, isVisibleFloatingButton = (index == 0)},
     );
+
+    isDialOpen.value = false;
   }
 }
