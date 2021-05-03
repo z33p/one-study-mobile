@@ -1,48 +1,34 @@
 import 'package:one_study_mobile/models/shared/entity.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:one_study_mobile/models/tables/deck_table.dart';
 
-class Deck extends Entity {
+class Deck implements Entity {
   int? deckId;
 
   final String title;
   final String description;
 
-  Deck(
-      {required this.deckId,
-      required this.title,
-      required this.description,
-      createdAt,
-      updatedAt})
-      : super(createdAt, updatedAt);
+  Deck({
+    required this.deckId,
+    required this.title,
+    required this.description,
+    this.createdAt,
+    this.updatedAt,
+  });
 
-  Deck.make({required this.title, required this.description}) : super.make();
+  Deck.make({required this.title, required this.description});
 
-  static String tableName = "decks";
-
-  static String idColumn = "deck_id";
-  static String titleColumn = "title";
-  static String descriptionColumn = "description";
-
-  static Future<void> createTable(Database db) async {
-    return await db.execute("""
-      CREATE TABLE $tableName(
-        $idColumn INTEGER PRIMARY KEY
-        , $titleColumn TEXT
-        , $descriptionColumn TEXT
-        ${Entity.createModelColumnsSql}
-      )
-    """);
-  }
+  final DeckTable dbTable = DeckTable.instance;
 
   static Deck fromMap(Map<String, dynamic> deckMap) {
-    var entity = Entity.fromMap(deckMap);
+    var deckTable = DeckTable.instance;
 
     var deck = Deck(
-        deckId: deckMap[idColumn],
-        title: deckMap[titleColumn],
-        description: deckMap[descriptionColumn],
-        createdAt: entity.createdAt,
-        updatedAt: entity.updatedAt);
+      deckId: deckMap[deckTable.idColumn],
+      title: deckMap[deckTable.titleColumn],
+      description: deckMap[deckTable.descriptionColumn],
+      createdAt: DateTime.parse(deckMap[Entity.createdAtColumn]),
+      updatedAt: DateTime.parse(deckMap[Entity.updatedAtColumn]),
+    );
 
     return deck;
   }
@@ -54,11 +40,17 @@ class Deck extends Entity {
   }
 
   Map<String, dynamic> toMap() {
-    var deckMap = super.toMap();
+    var deckMap = Entity.entityToMap(this);
 
-    deckMap[titleColumn] = this.title;
-    deckMap[descriptionColumn] = this.description;
+    deckMap[dbTable.titleColumn] = this.title;
+    deckMap[dbTable.descriptionColumn] = this.description;
 
     return deckMap;
   }
+
+  @override
+  DateTime? createdAt;
+
+  @override
+  DateTime? updatedAt;
 }

@@ -1,6 +1,6 @@
-import 'package:one_study_mobile/models/card.dart';
-import 'package:one_study_mobile/models/card_deck.dart';
-import 'package:one_study_mobile/models/deck.dart';
+import 'package:one_study_mobile/models/tables/card_deck_table.dart';
+import 'package:one_study_mobile/models/tables/card_table.dart';
+import 'package:one_study_mobile/models/tables/deck_table.dart';
 import "package:path/path.dart";
 import 'package:sqflite/sqflite.dart';
 
@@ -31,9 +31,9 @@ class MyDatabase {
   }
 
   static void onCreate(Database db, int version) async {
-    await Card.createTable(db);
-    await Deck.createTable(db);
-    await CardDeck.createTable(db);
+    await CardTable.instance.createTable(db);
+    await DeckTable.instance.createTable(db);
+    await CardDeckTable.instance.createTable(db);
   }
 
   static Future<void> deleteDbIfExists() async {

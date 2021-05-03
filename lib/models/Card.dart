@@ -1,48 +1,40 @@
 import 'package:one_study_mobile/models/shared/entity.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:one_study_mobile/models/tables/card_table.dart';
 
-class Card extends Entity {
+class Card implements Entity {
   int? cardId;
 
   final String front;
   final String back;
 
-  Card(
-      {required this.cardId,
-      required this.front,
-      required this.back,
-      createdAt,
-      updatedAt})
-      : super(createdAt, updatedAt);
+  @override
+  DateTime? createdAt;
 
-  Card.make({required this.front, required this.back}) : super.make();
+  @override
+  DateTime? updatedAt;
 
-  static String tableName = "cards";
+  Card({
+    required this.cardId,
+    required this.front,
+    required this.back,
+    this.createdAt,
+    this.updatedAt,
+  });
 
-  static String idColumn = "card_id";
-  static String frontColumn = "front";
-  static String backColumn = "back";
+  Card.make({required this.front, required this.back});
 
-  static Future<void> createTable(Database db) async {
-    return await db.execute("""
-      CREATE TABLE $tableName(
-        $idColumn INTEGER PRIMARY KEY
-        , $frontColumn TEXT
-        , $backColumn TEXT
-        ${Entity.createModelColumnsSql}
-      )
-    """);
-  }
+  final CardTable dbTable = CardTable.instance;
 
   static Card fromMap(Map<String, dynamic> cardMap) {
-    var entity = Entity.fromMap(cardMap);
+    var cardTable = CardTable.instance;
 
     var card = Card(
-        cardId: cardMap[idColumn],
-        front: cardMap[frontColumn],
-        back: cardMap[backColumn],
-        createdAt: entity.createdAt,
-        updatedAt: entity.updatedAt);
+      cardId: cardMap[cardTable.idColumn],
+      front: cardMap[cardTable.frontColumn],
+      back: cardMap[cardTable.backColumn],
+      createdAt: DateTime.parse(cardMap[Entity.createdAtColumn]),
+      updatedAt: DateTime.parse(cardMap[Entity.updatedAtColumn]),
+    );
 
     return card;
   }
@@ -54,10 +46,10 @@ class Card extends Entity {
   }
 
   Map<String, dynamic> toMap() {
-    var cardMap = super.toMap();
+    var cardMap = Entity.entityToMap(this);
 
-    cardMap[frontColumn] = this.front;
-    cardMap[backColumn] = this.back;
+    cardMap[dbTable.frontColumn] = this.front;
+    cardMap[dbTable.backColumn] = this.back;
 
     return cardMap;
   }

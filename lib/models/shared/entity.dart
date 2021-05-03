@@ -1,4 +1,6 @@
-class Entity {
+import 'package:one_study_mobile/models/shared/db_table.dart';
+
+abstract class Entity {
   DateTime? createdAt;
   DateTime? updatedAt;
 
@@ -8,25 +10,20 @@ class Entity {
   Entity(this.createdAt, this.updatedAt);
   Entity.make();
 
-  static String createModelColumnsSql = """
+  DbTable get dbTable;
+
+  static String entityColumnsSql = """
     , $createdAtColumn TEXT
     , $updatedAtColumn TEXT
   """;
 
-  static Entity fromMap(Map<String, dynamic> modelMap) {
-    var createdAt = DateTime.parse(modelMap[createdAtColumn]);
-    var updatedAt = DateTime.parse(modelMap[updatedAtColumn]);
+  Map<String, dynamic> toMap();
 
-    var model = Entity(createdAt, updatedAt);
-
-    return model;
-  }
-
-  Map<String, dynamic> toMap() {
+  static Map<String, dynamic> entityToMap(Entity entity) {
     var modelMap = Map<String, dynamic>();
 
-    modelMap[Entity.createdAtColumn] = this.createdAt.toString();
-    modelMap[Entity.updatedAtColumn] = this.updatedAt.toString();
+    modelMap[Entity.createdAtColumn] = entity.createdAt.toString();
+    modelMap[Entity.updatedAtColumn] = entity.updatedAt.toString();
 
     return modelMap;
   }
