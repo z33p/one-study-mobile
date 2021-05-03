@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:one_study_mobile/ui/screens/home/home.dart';
 
-void main() {
+import 'database/my_database.dart';
+
+void main() async {
+  await MyDatabase.init();
   runApp(MyApp());
 }
 

@@ -5,25 +5,20 @@ import "package:path/path.dart";
 import 'package:sqflite/sqflite.dart';
 
 class MyDatabase {
+  
   static const String dbName = "personal_growth.db";
   static String dbPath = "";
 
-  static Database? instance;
+  static late Database dbInstance;
 
   static Future<void> init() async {
     // deleteDbIfExists();
-    instance = await getInstance();
-  }
-
-  static Future<Database> getInstance() async {
-    if (instance != null) return instance!;
-
     if (dbPath.isEmpty) dbPath = join(await getDatabasesPath(), dbName);
 
     final database = openDatabase(dbPath,
         onConfigure: onConfigure, onCreate: onCreate, version: 1);
 
-    return database;
+    dbInstance = await database;
   }
 
   static void onConfigure(Database db) async {
