@@ -1,10 +1,9 @@
-import 'package:one_study_mobile/models/shared/db_table.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'card_table.dart';
 import 'deck_table.dart';
 
-class CardDeckTable implements DbTable {
+class CardDeckTable {
   CardDeckTable._privateConstructor();
 
   static final CardDeckTable _instance = CardDeckTable._privateConstructor();
