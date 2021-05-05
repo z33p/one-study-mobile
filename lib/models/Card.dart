@@ -14,7 +14,7 @@ class Card implements Entity {
   DateTime? updatedAt;
 
   Card({
-    required this.cardId,
+    this.cardId,
     required this.front,
     required this.back,
     this.createdAt,

@@ -1,21 +1,14 @@
 abstract class FilterAbstract {
-  final String tableName;
-
   int? id;
   List<String>? columns;
+
+  String? orderByColumn;
 
   int? limit;
   int? offset;
 
-  bool? distinct;
-  String? groupBy;
-  String? having;
-  String? orderBy;
 
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  final String rawQuery;
 
-  FilterAbstract(this.tableName);
-
-  String generateSqlQuery();
+  FilterAbstract(this.rawQuery);
 }
