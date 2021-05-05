@@ -4,6 +4,8 @@ import 'package:one_study_mobile/ui/screens/home/home.dart';
 import 'database/my_database.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await MyDatabase.init();
   runApp(MyApp());
 }

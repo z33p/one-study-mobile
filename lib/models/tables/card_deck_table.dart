@@ -17,8 +17,11 @@ class CardDeckTable {
 
     return await db.execute("""
       CREATE TABLE $tableName(
-        FOREIGN KEY (${cardTable.idColumn}) REFERENCES ${cardTable.tableName} (${cardTable.idColumn}) ON DELETE NO ACTION ON UPDATE NO ACTION
-        , FOREIGN KEY ($deckTable.idColumn}) REFERENCES $deckTable.tableName} ($deckTable.idColumn}) ON DELETE NO ACTION ON UPDATE NO ACTION
+        ${cardTable.idColumn} INTEGER
+        , ${deckTable.idColumn} INTEGER
+
+        , FOREIGN KEY (${cardTable.idColumn}) REFERENCES ${cardTable.tableName} (${cardTable.idColumn}) ON DELETE NO ACTION ON UPDATE NO ACTION
+        , FOREIGN KEY (${deckTable.idColumn}) REFERENCES ${deckTable.tableName} (${deckTable.idColumn}) ON DELETE NO ACTION ON UPDATE NO ACTION
       )
     """);
   }
