@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:one_study_mobile/ui/screens/home/widgets/speed_dial_floating_button.dart';
-import 'package:one_study_mobile/ui/screens/list_flashcards/list_flashcards.dart';
-import 'package:one_study_mobile/ui/screens/play_flashcards.dart';
-import 'package:one_study_mobile/ui/screens/settings.dart';
+import 'package:one_study_mobile/screens/ui/home/widgets/speed_dial_floating_button.dart';
+import 'package:one_study_mobile/screens/ui/list_flashcards/list_flashcards.dart';
+import 'package:one_study_mobile/screens/ui/play_flashcards.dart';
+import 'package:one_study_mobile/screens/ui/settings.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({required Key key, required this.title}) : super(key: key);
@@ -36,8 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: listScreens[currentIndex],
       floatingActionButton: SpeedDialFloatingButton(
-        visible: isVisibleFloatingButton, isDialOpen: isDialOpen
-      ),
+          visible: isVisibleFloatingButton, isDialOpen: isDialOpen),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) => changeScreenBottomNavigation(index),
         currentIndex: currentIndex,

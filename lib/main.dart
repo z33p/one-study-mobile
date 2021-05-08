@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_study_mobile/ui/screens/home/home.dart';
+import 'package:one_study_mobile/screens/ui/home/home.dart';
 
 import 'database/my_database.dart';
 
