@@ -1,11 +1,10 @@
 import 'dart:async';
 
 import 'package:one_study_mobile/models/card.dart';
-import 'package:one_study_mobile/repositories/filters/cards/card_filter_builder.dart';
-import 'package:one_study_mobile/repositories/repository.dart';
+import 'package:one_study_mobile/services/card_service.dart';
 
 class ListFlashCardsBloc {
-  final _repository = new Repository();
+  final cardService = new CardService();
 
   ListFlashCardsBloc() {
     queryCards();
@@ -16,14 +15,7 @@ class ListFlashCardsBloc {
   Stream<List<Card>> get cardsStream => _cardsStreamController.stream;
 
   queryCards() async {
-    var cardsMap =
-        await _repository.findBy(filter: CardFilterBuilder().build());
-
-    cards = cardsMap
-        .map(
-          (cardMap) => Card.fromMap(cardMap),
-        )
-        .toList();
+    var cards = await cardService.getCards();
 
     _cardsStreamController.add(cards);
   }
