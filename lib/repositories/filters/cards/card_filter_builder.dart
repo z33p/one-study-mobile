@@ -34,7 +34,7 @@ class CardFilterBuilder extends FilterBuilderAbstract {
   }
 
   @override
-  FilterAbstract build() {
+  CardFilter build() {
     var filter = CardFilter(this.rawQuery);
 
     return filter;
