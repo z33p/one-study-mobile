@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one_study_mobile/models/card.dart' as Models;
-import 'package:one_study_mobile/screens/ui/shared/custom_providers/state_provider.dart';
+import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
 
 import 'list_flashcards_state.dart';
 

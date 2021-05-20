@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:one_study_mobile/screens/ui/home/widgets/speed_dial_floating_button.dart';
-import 'package:one_study_mobile/screens/ui/list_flashcards/list_flashcards.dart';
-import 'package:one_study_mobile/screens/ui/play_flashcards.dart';
-import 'package:one_study_mobile/screens/ui/settings.dart';
+import 'package:one_study_mobile/screens/home/widgets/speed_dial_floating_button.dart';
+import 'package:one_study_mobile/screens/list_flashcards/list_flashcards.dart';
+import 'package:one_study_mobile/screens/play_flashcards.dart';
+import 'package:one_study_mobile/screens/settings.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({required Key key, required this.title}) : super(key: key);

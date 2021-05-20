@@ -1,5 +1,6 @@
-import 'package:one_study_mobile/screens/blocs/list_flashcards_bloc/list_flashcards_bloc.dart';
-import 'package:one_study_mobile/screens/ui/shared/custom_providers/state_provider.dart';
+import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
+
+import 'list_flashcards_bloc.dart';
 
 class ListFlashCardsState extends MyState {
   ListFlashCardsBloc listFlashCardsBloc = new ListFlashCardsBloc();
