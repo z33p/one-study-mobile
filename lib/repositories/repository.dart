@@ -16,7 +16,7 @@ class Repository {
 
   final Database dbInstance = MyDatabase.dbInstance;
 
-  Future<List<Map<String, dynamic>>> findBy<E extends Entity>({
+  Future<List<Map<String, dynamic>>> findBy({
     required FilterAbstract filter,
   }) async {
     var entities = await dbInstance.rawQuery(filter.rawQuery);
