@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:one_study_mobile/screens/create_card.dart';
+import 'package:one_study_mobile/screens/create_deck.dart';
 
 class SpeedDialFloatingButton extends StatelessWidget {
   final bool visible;
@@ -34,7 +36,12 @@ class SpeedDialFloatingButton extends StatelessWidget {
             ),
             backgroundColor: Theme.of(context).primaryColor,
             label: 'Add Deck',
-            onTap: () => print('FIRST CHILD')),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CreateDeck()),
+              );
+            }),
         SpeedDialChild(
           child: Icon(
             Icons.post_add,
@@ -42,7 +49,12 @@ class SpeedDialFloatingButton extends StatelessWidget {
           ),
           label: 'Add Card',
           backgroundColor: Theme.of(context).primaryColor,
-          onTap: () => print('SECOND CHILD'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CreateCard()),
+            );
+          },
         ),
       ],
     );
