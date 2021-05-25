@@ -34,7 +34,7 @@ class DeckFilterBuilder extends FilterBuilderAbstract {
   }
 
   @override
-  FilterAbstract build() {
+  DeckFilter build() {
     var filter = DeckFilter(this.rawQuery);
 
     return filter;
