@@ -8,6 +8,9 @@ abstract class MyState {
 class StateProvider<T extends MyState> extends StatefulWidget {
   T? _state;
   late T Function() _createInstance;
+  Function onInitState = () {};
+  Function onDispose = () {};
+  final bool alwaysDispose;
 
   Widget child;
 
@@ -15,9 +18,15 @@ class StateProvider<T extends MyState> extends StatefulWidget {
     Key? key,
     required T state,
     required this.child,
-  })   : _state = state,
+    this.alwaysDispose = true,
+    Function? onInitState,
+    Function? onDispose,
+  })  : _state = state,
         super(key: key) {
     _createInstance = state.createInstance as T Function();
+
+    if (onInitState != null) this.onInitState = onInitState;
+    if (onDispose != null) this.onDispose = onDispose;
   }
 
   static StateProvider<T> of<T extends MyState>(BuildContext context) {
@@ -35,8 +44,13 @@ class StateProvider<T extends MyState> extends StatefulWidget {
     return _state!;
   }
 
+  void initState() {
+    onInitState();
+  }
+
   void dispose() {
-    _state = null;
+    onDispose();
+    if (alwaysDispose) _state = null;
   }
 
   @override
@@ -44,6 +58,12 @@ class StateProvider<T extends MyState> extends StatefulWidget {
 }
 
 class _MyProvider extends State<StateProvider> {
+  @override
+  void initState() {
+    super.initState();
+    widget.initState();
+  }
+
   @override
   void dispose() {
     super.dispose();
