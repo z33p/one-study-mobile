@@ -5,8 +5,6 @@ import 'list_flashcards_bloc.dart';
 class ListFlashCardsState extends MyState {
   ListFlashCardsBloc listFlashCardsBloc = new ListFlashCardsBloc();
 
-  ListFlashCardsState();
-
   @override
   ListFlashCardsState createInstance() {
     var instance = new ListFlashCardsState();

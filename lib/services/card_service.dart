@@ -24,4 +24,8 @@ class CardService extends ServiceAbstract {
 
     return cards;
   }
+
+  Future<void> createCard(Card card) async {
+    await repository.insert(card);
+  }
 }

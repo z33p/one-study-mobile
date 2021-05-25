@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:one_study_mobile/screens/create_card/create_card.dart';
+import 'package:one_study_mobile/screens/create_card/create_card_screen.dart';
 import 'package:one_study_mobile/screens/create_deck.dart';
 
 class SpeedDialFloatingButton extends StatelessWidget {
@@ -52,7 +52,7 @@ class SpeedDialFloatingButton extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => CreateCard()),
+              MaterialPageRoute(builder: (context) => CreateCardScreen()),
             );
           },
         ),
