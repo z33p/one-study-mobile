@@ -1,7 +1,7 @@
-import 'package:one_study_mobile/models/shared/entity.dart';
+import 'package:one_study_mobile/models/shared/entity_abstract.dart';
 import 'package:one_study_mobile/models/tables/card_table.dart';
 
-class Card implements Entity {
+class Card implements EntityAbstract {
   int? cardId;
 
   final String front;
@@ -32,8 +32,8 @@ class Card implements Entity {
       cardId: cardMap[cardTable.idColumn],
       front: cardMap[cardTable.frontColumn],
       back: cardMap[cardTable.backColumn],
-      createdAt: DateTime.parse(cardMap[Entity.createdAtColumn]),
-      updatedAt: DateTime.parse(cardMap[Entity.updatedAtColumn]),
+      createdAt: DateTime.parse(cardMap[EntityAbstract.createdAtColumn]),
+      updatedAt: DateTime.parse(cardMap[EntityAbstract.updatedAtColumn]),
     );
 
     return card;
@@ -46,7 +46,7 @@ class Card implements Entity {
   }
 
   Map<String, dynamic> toMap() {
-    var cardMap = Entity.entityToMap(this);
+    var cardMap = EntityAbstract.entityToMap(this);
 
     cardMap[dbTable.frontColumn] = this.front;
     cardMap[dbTable.backColumn] = this.back;

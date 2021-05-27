@@ -1,6 +1,5 @@
-import 'package:one_study_mobile/models/shared/entity.dart';
+import 'package:one_study_mobile/models/shared/entity_abstract.dart';
 import 'package:one_study_mobile/models/tables/card_table.dart';
-import 'package:one_study_mobile/repositories/shared/filter_abstract.dart';
 import 'package:one_study_mobile/repositories/shared/filter_builder_abstract.dart';
 import 'package:one_study_mobile/repositories/shared/sql_snippets.dart';
 
@@ -27,7 +26,7 @@ class CardFilterBuilder extends FilterBuilderAbstract {
     return this;
   }
 
-  String orderByColumn = Entity.createdAtColumn;
+  String orderByColumn = EntityAbstract.createdAtColumn;
   CardFilterBuilder setorderByColumn(String orderByColumn) {
     this.orderByColumn = orderByColumn;
     return this;

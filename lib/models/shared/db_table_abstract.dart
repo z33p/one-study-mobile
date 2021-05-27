@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 
-abstract class DbTable {
+abstract class DbTableAbstract {
   String get tableName;
   String get idColumn;
 

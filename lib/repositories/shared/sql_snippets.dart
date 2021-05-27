@@ -1,4 +1,4 @@
-import 'package:one_study_mobile/models/shared/entity.dart';
+import 'package:one_study_mobile/models/shared/entity_abstract.dart';
 
 class SqlSnippets {
   static String sqlWheres(List<String?> sqlWheresList) {
@@ -16,7 +16,7 @@ class SqlSnippets {
     return where;
   }
 
-  static String whereEntityPkEquals(Entity entity) {
+  static String whereEntityPkEquals(EntityAbstract entity) {
     var entityId = entity.toMap()[entity.dbTable.idColumn];
 
     return wherePkEquals(entity.dbTable.idColumn, entityId);

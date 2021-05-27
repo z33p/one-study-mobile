@@ -1,5 +1,7 @@
 import 'package:one_study_mobile/database/my_database.dart';
-import 'package:one_study_mobile/models/shared/entity.dart';
+import 'package:one_study_mobile/models/shared/db_table_abstract.dart';
+import 'package:one_study_mobile/models/shared/entity_abstract.dart';
+import 'package:one_study_mobile/models/shared/pivot_table_abstract.dart';
 import 'package:one_study_mobile/repositories/shared/filter_abstract.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -24,7 +26,7 @@ class Repository {
     return entities;
   }
 
-  Future<int> insert<E extends Entity>(E entity) async {
+  Future<int> insert<E extends EntityAbstract>(E entity) async {
     var now = DateTime.now();
 
     entity.createdAt = now;
@@ -35,7 +37,7 @@ class Repository {
     return id;
   }
 
-  void update<E extends Entity>(E updatedEntity) async {
+  void update<E extends EntityAbstract>(E updatedEntity) async {
     var updatedEntityMap = updatedEntity.toMap();
 
     dbInstance.update(
@@ -45,7 +47,7 @@ class Repository {
     );
   }
 
-  void delete<E extends Entity>(E entity) async {
+  void delete<E extends EntityAbstract>(E entity) async {
     await dbInstance.delete(
       entity.dbTable.tableName,
       where: SqlSnippets.whereEntityPkEquals(entity),

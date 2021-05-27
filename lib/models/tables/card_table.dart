@@ -1,8 +1,8 @@
-import 'package:one_study_mobile/models/shared/db_table.dart';
-import 'package:one_study_mobile/models/shared/entity.dart';
+import 'package:one_study_mobile/models/shared/db_table_abstract.dart';
+import 'package:one_study_mobile/models/shared/entity_abstract.dart';
 import 'package:sqflite/sqflite.dart';
 
-class CardTable implements DbTable {
+class CardTable implements DbTableAbstract {
   CardTable._privateConstructor();
 
   static final CardTable _instance = CardTable._privateConstructor();
@@ -21,7 +21,7 @@ class CardTable implements DbTable {
         $idColumn INTEGER PRIMARY KEY
         , $frontColumn TEXT
         , $backColumn TEXT
-        ${Entity.entityColumnsSql}
+        ${EntityAbstract.entityColumnsSql}
       )
     """);
   }

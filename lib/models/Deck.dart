@@ -1,7 +1,7 @@
-import 'package:one_study_mobile/models/shared/entity.dart';
+import 'package:one_study_mobile/models/shared/entity_abstract.dart';
 import 'package:one_study_mobile/models/tables/deck_table.dart';
 
-class Deck implements Entity {
+class Deck implements EntityAbstract {
   int? deckId;
 
   final String title;
@@ -26,8 +26,8 @@ class Deck implements Entity {
       deckId: deckMap[deckTable.idColumn],
       title: deckMap[deckTable.titleColumn],
       description: deckMap[deckTable.descriptionColumn],
-      createdAt: DateTime.parse(deckMap[Entity.createdAtColumn]),
-      updatedAt: DateTime.parse(deckMap[Entity.updatedAtColumn]),
+      createdAt: DateTime.parse(deckMap[EntityAbstract.createdAtColumn]),
+      updatedAt: DateTime.parse(deckMap[EntityAbstract.updatedAtColumn]),
     );
 
     return deck;
@@ -40,7 +40,7 @@ class Deck implements Entity {
   }
 
   Map<String, dynamic> toMap() {
-    var deckMap = Entity.entityToMap(this);
+    var deckMap = EntityAbstract.entityToMap(this);
 
     deckMap[dbTable.titleColumn] = this.title;
     deckMap[dbTable.descriptionColumn] = this.description;
