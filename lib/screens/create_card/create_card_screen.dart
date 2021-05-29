@@ -4,8 +4,14 @@ import 'package:one_study_mobile/screens/create_card/create_cards_state.dart';
 import 'package:one_study_mobile/screens/home/home_bloc.dart';
 import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
 
+import 'widget/select_decks/select_decks.dart';
+
 class CreateCardScreen extends StatelessWidget {
   final state = new CreateCardsState();
+
+  void initState(CreateCardsBloc createCardsBloc) {
+    createCardsBloc.queryDecks();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,63 +35,71 @@ class CreateCardScreen extends StatelessWidget {
       ),
       body: StateProvider<CreateCardsState>(
         state: state,
+        onInitState: () => initState(createCardsBloc),
         child: Container(
           color: Colors.grey[200],
           child: Form(
             key: state.formKey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Column(
-                    children: [
-                      Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              TextFormField(
-                                maxLength: 20,
-                                controller: state.inputFrontTextController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter some text';
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  icon: Icon(
-                                    Icons.flip_to_front_sharp,
-                                    color: Theme.of(context).primaryColor,
+                Expanded(
+                  flex: 1,
+                  child: SelectDecks(),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Column(
+                      children: [
+                        Card(
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                TextFormField(
+                                  maxLength: 20,
+                                  controller: state.inputFrontTextController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter some text';
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    icon: Icon(
+                                      Icons.flip_to_front_sharp,
+                                      color: Theme.of(context).primaryColor,
+                                    ),
+                                    labelText: "Front",
                                   ),
-                                  labelText: "Front",
                                 ),
-                              ),
-                              TextFormField(
-                                maxLength: 20,
-                                controller: state.inputBackTextController,
-                                decoration: InputDecoration(
-                                  icon: Icon(
-                                    Icons.flip_to_back_sharp,
-                                    color: Theme.of(context).primaryColor,
+                                TextFormField(
+                                  maxLength: 20,
+                                  controller: state.inputBackTextController,
+                                  decoration: InputDecoration(
+                                    icon: Icon(
+                                      Icons.flip_to_back_sharp,
+                                      color: Theme.of(context).primaryColor,
+                                    ),
+                                    labelText: "Back",
                                   ),
-                                  labelText: "Back",
                                 ),
-                              ),
-                              Center(
-                                child: ElevatedButton(
-                                  onPressed: () =>
-                                      createCardsBloc.submitCard(context),
-                                  child: Text("Create"),
+                                Center(
+                                  child: ElevatedButton(
+                                    onPressed: () =>
+                                        createCardsBloc.submitCard(context),
+                                    child: Text("Create"),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 )
               ],
