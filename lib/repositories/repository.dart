@@ -1,5 +1,4 @@
 import 'package:one_study_mobile/database/my_database.dart';
-import 'package:one_study_mobile/models/shared/db_table_abstract.dart';
 import 'package:one_study_mobile/models/shared/entity_abstract.dart';
 import 'package:one_study_mobile/models/shared/pivot_table_abstract.dart';
 import 'package:one_study_mobile/repositories/shared/filter_abstract.dart';
@@ -53,4 +52,46 @@ class Repository {
       where: SqlSnippets.whereEntityPkEquals(entity),
     );
   }
+
+  Future<void> attach<E extends EntityAbstract, P extends PivotTableAbstract>({
+    required P pivotTable,
+    required E entity,
+    required List<int> attachIdList,
+  }) async {
+    var otherTable = pivotTable.leftTable.tableName == entity.dbTable.tableName
+        ? pivotTable.rightTable
+        : pivotTable.leftTable;
+
+    var entityId = entity.toMap()[entity.dbTable.idColumn];
+
+    var where = """
+      ${pivotTable.leftTable.idColumn} = $entityId AND ${otherTable.idColumn} IN (${attachIdList.join(",")})
+    """;
+
+    var alreadyAttached = (await dbInstance.query(
+      pivotTable.tableName,
+      columns: [otherTable.idColumn],
+      where: where,
+    ))
+        .map((detachedEntityMap) => int.parse(
+              detachedEntityMap[otherTable.idColumn].toString(),
+            ))
+        .toList();
+
+    attachIdList.removeWhere(
+      (toAttachId) =>
+          alreadyAttached.any((attachedId) => attachedId == toAttachId),
+    );
+
+    if (attachIdList.isNotEmpty) {
+      var sqlInsert = attachIdList.map((idToAttach) => """
+        INSERT INTO ${pivotTable.tableName}(${entity.dbTable.idColumn}, ${otherTable.idColumn})
+        VALUES ($entityId, $idToAttach)
+      """).join("\n");
+
+      await dbInstance.rawInsert(sqlInsert);
+    }
+  }
+
+  void detach<E extends EntityAbstract>(E entity, List<int> entitiesIdList) {}
 }
