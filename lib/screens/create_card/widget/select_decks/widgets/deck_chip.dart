@@ -32,7 +32,9 @@ class DeckChip extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          onPressed: () => deckSelected.value = value,
+          onPressed: () => deckSelected.value == null
+              ? deckSelected.value = value
+              : deckSelected.value = null,
         );
       },
     );

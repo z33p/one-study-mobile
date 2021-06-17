@@ -86,7 +86,7 @@ class Repository {
     if (attachIdList.isNotEmpty) {
       var sqlInsert = attachIdList.map((idToAttach) => """
         INSERT INTO ${pivotTable.tableName}(${entity.dbTable.idColumn}, ${otherTable.idColumn})
-        VALUES ($entityId, $idToAttach)
+        VALUES ($entityId, $idToAttach);
       """).join("\n");
 
       await dbInstance.rawInsert(sqlInsert);

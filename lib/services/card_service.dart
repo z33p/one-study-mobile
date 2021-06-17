@@ -1,4 +1,5 @@
 import 'package:one_study_mobile/models/card.dart';
+import 'package:one_study_mobile/models/tables/card_deck_table.dart';
 import 'package:one_study_mobile/repositories/filters/cards/card_filter.dart';
 import 'package:one_study_mobile/repositories/filters/cards/card_filter_builder.dart';
 
@@ -25,7 +26,16 @@ class CardService extends ServiceAbstract {
     return cards;
   }
 
-  Future<void> createCard(Card card) async {
-    await repository.insert(card);
+  Future<void> create(
+    Card card, {
+    List<int> attachDeckIdList = const [],
+  }) async {
+    card.cardId = await repository.insert(card);
+
+    await repository.attach(
+      pivotTable: CardDeckTable.instance,
+      entity: card,
+      attachIdList: attachDeckIdList,
+    );
   }
 }

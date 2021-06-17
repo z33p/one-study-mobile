@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
-import 'package:one_study_mobile/screens/create_card/create_cards_bloc.dart';
-import 'package:one_study_mobile/screens/create_card/create_cards_state.dart';
+import 'package:one_study_mobile/screens/create_card/create_card_bloc.dart';
+import 'package:one_study_mobile/screens/create_card/create_card_state.dart';
 import 'package:one_study_mobile/screens/home/home_bloc.dart';
 import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
 
@@ -41,17 +41,16 @@ class CreateCardScreen extends StatelessWidget {
           child: Form(
             key: state.formKey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  flex: 1,
-                  child: SelectDecks(),
-                ),
-                Expanded(
-                  flex: 2,
+                  flex: 11,
                   child: Padding(
-                    padding: const EdgeInsets.all(4.0),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8.0,
+                      horizontal: 4.0,
+                    ),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Card(
                           child: Padding(
@@ -101,7 +100,11 @@ class CreateCardScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                )
+                ),
+                Expanded(
+                  flex: 5,
+                  child: SelectDecks(),
+                ),
               ],
             ),
           ),

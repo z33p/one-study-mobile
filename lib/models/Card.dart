@@ -48,6 +48,7 @@ class Card implements EntityAbstract {
   Map<String, dynamic> toMap() {
     var cardMap = EntityAbstract.entityToMap(this);
 
+    cardMap[dbTable.idColumn] = this.cardId;
     cardMap[dbTable.frontColumn] = this.front;
     cardMap[dbTable.backColumn] = this.back;
 
