@@ -25,7 +25,7 @@ class DeckService extends ServiceAbstract {
     return decks;
   }
 
-  Future<void> createDeck(Deck deck) async {
+  Future<void> create(Deck deck) async {
     await repository.insert(deck);
   }
 }
