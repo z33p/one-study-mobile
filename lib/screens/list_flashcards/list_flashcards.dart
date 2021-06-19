@@ -1,37 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:one_study_mobile/models/card.dart' as Models;
+import 'package:one_study_mobile/screens/list_flashcards/list_flashcards_bloc.dart';
 import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
 
 import 'list_flashcards_state.dart';
 
-class ListFlashCards extends StatefulWidget {
-  @override
-  _ListFlashCardsState createState() => _ListFlashCardsState();
-}
+class ListFlashCards extends StatelessWidget {
+  final state = new ListFlashCardsState();
 
-class _ListFlashCardsState extends State<ListFlashCards> {
-  ListFlashCardsState state = new ListFlashCardsState();
+  initState(ListFlashCardsBloc listFlashCardsBloc) {
+    listFlashCardsBloc.loadCardsList();
+  }
 
   @override
   Widget build(BuildContext context) {
+    var listFlashCardsBloc = new ListFlashCardsBloc(state);
+
     return StateProvider<ListFlashCardsState>(
       state: state,
-      child: StreamBuilder<List<Models.Card>>(
-        stream: state.listFlashCardsBloc.cardsStream,
-        builder: (context, snapshot) {
-          var cards = snapshot.data == null ? <Models.Card>[] : snapshot.data!;
-
-          return ListView(
-            children: [
-              ...cards
-                  .map((card) => ListTile(
-                        title: Text(card.front),
-                        subtitle: Text(card.back),
-                      ))
-                  .toList(),
-            ],
-          );
-        },
+      onInitState: () => initState(listFlashCardsBloc),
+      child: ValueListenableBuilder<List<Models.Card>>(
+        valueListenable: state.cards,
+        builder: (BuildContext context, cards, _) => ListView(
+          children: [
+            ...cards
+                .map((card) => ListTile(
+                      title: Text(card.front),
+                      subtitle: Text(card.back),
+                    ))
+                .toList(),
+          ],
+        ),
       ),
     );
   }
