@@ -1,14 +1,19 @@
 import 'package:one_study_mobile/models/shared/db_table_abstract.dart';
 
 abstract class EntityAbstract {
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  late DateTime createdAt;
+  late DateTime updatedAt;
 
   static String createdAtColumn = "created_at";
   static String updatedAtColumn = "updated_at";
 
   EntityAbstract(this.createdAt, this.updatedAt);
-  EntityAbstract.make();
+  EntityAbstract.make() {
+    var now = DateTime.now();
+
+    createdAt = now;
+    updatedAt = now;
+  }
 
   DbTableAbstract get dbTable;
 

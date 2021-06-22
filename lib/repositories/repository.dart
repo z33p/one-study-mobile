@@ -26,11 +26,6 @@ class Repository {
   }
 
   Future<int> insert<E extends EntityAbstract>(E entity) async {
-    var now = DateTime.now();
-
-    entity.createdAt = now;
-    entity.updatedAt = now;
-
     var id = await dbInstance.insert(entity.dbTable.tableName, entity.toMap());
 
     return id;

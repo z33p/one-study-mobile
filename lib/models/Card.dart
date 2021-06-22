@@ -1,27 +1,21 @@
 import 'package:one_study_mobile/models/shared/entity_abstract.dart';
 import 'package:one_study_mobile/models/tables/card_table.dart';
 
-class Card implements EntityAbstract {
+class Card extends EntityAbstract {
   int? cardId;
 
   final String front;
   final String back;
 
-  @override
-  DateTime? createdAt;
-
-  @override
-  DateTime? updatedAt;
-
   Card({
-    this.cardId,
+    required this.cardId,
     required this.front,
     required this.back,
-    this.createdAt,
-    this.updatedAt,
-  });
+    required createdAt,
+    required updatedAt,
+  }) : super(createdAt, updatedAt);
 
-  Card.make({required this.front, required this.back});
+  Card.make({required this.front, required this.back, score}) : super.make();
 
   final CardTable dbTable = CardTable.instance;
 

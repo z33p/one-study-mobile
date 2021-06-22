@@ -1,7 +1,7 @@
 import 'package:one_study_mobile/models/shared/entity_abstract.dart';
 import 'package:one_study_mobile/models/tables/deck_table.dart';
 
-class Deck implements EntityAbstract {
+class Deck extends EntityAbstract {
   int? deckId;
 
   final String title;
@@ -11,11 +11,11 @@ class Deck implements EntityAbstract {
     required this.deckId,
     required this.title,
     required this.description,
-    this.createdAt,
-    this.updatedAt,
-  });
+    required createdAt,
+    required updatedAt,
+  }) : super(createdAt, updatedAt);
 
-  Deck.make({required this.title, required this.description});
+  Deck.make({required this.title, required this.description}) : super.make();
 
   final DeckTable dbTable = DeckTable.instance;
 
@@ -47,10 +47,4 @@ class Deck implements EntityAbstract {
 
     return deckMap;
   }
-
-  @override
-  DateTime? createdAt;
-
-  @override
-  DateTime? updatedAt;
 }
