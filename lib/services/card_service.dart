@@ -15,13 +15,13 @@ class CardService extends ServiceAbstract {
   CardService._internal();
 
   Future<List<Card>> getCards({CardFilter? cardFilter}) async {
-    if (cardFilter == null) {
+    if (cardFilter == null)
       cardFilter = CardFilterBuilder().build();
-    }
 
-    var cardsMap = await repository.findBy(filter: cardFilter);
-
-    var cards = Card.fromMapList(cardsMap);
+    var cards = await repository.findByMapped(
+      filter: cardFilter,
+      mapFunction: Card.fromMapList,
+    );
 
     return cards;
   }

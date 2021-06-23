@@ -1,9 +1,9 @@
 import 'package:one_study_mobile/database/my_database.dart';
 import 'package:one_study_mobile/models/shared/entity_abstract.dart';
 import 'package:one_study_mobile/models/shared/pivot_table_abstract.dart';
-import 'package:one_study_mobile/repositories/shared/filter_abstract.dart';
 import 'package:sqflite/sqflite.dart';
 
+import 'shared/filter_abstract.dart';
 import 'shared/sql_snippets.dart';
 
 class Repository {
@@ -16,6 +16,15 @@ class Repository {
   Repository._internal();
 
   final Database dbInstance = MyDatabase.dbInstance;
+
+  Future<List<E>> findByMapped<E extends EntityAbstract>({
+    required FilterAbstract filter,
+    required List<E> mapFunction(List<Map<String, dynamic>> entities),
+  }) async {
+    var entities = await dbInstance.rawQuery(filter.rawQuery);
+
+    return mapFunction(entities);
+  }
 
   Future<List<Map<String, dynamic>>> findBy({
     required FilterAbstract filter,

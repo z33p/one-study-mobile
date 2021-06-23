@@ -1,14 +1,11 @@
 abstract class FilterAbstract {
-  int? id;
-  List<String>? columns;
+  int? get id;
+  List<String>? get columns;
 
-  String? orderByColumn;
+  String? get orderByColumn;
 
-  int? limit;
-  int? offset;
+  int? get limit;
+  int? get offset;
 
-
-  final String rawQuery;
-
-  FilterAbstract(this.rawQuery);
+  String get rawQuery;
 }

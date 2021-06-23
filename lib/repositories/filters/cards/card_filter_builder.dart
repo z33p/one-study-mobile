@@ -1,59 +1,86 @@
 import 'package:one_study_mobile/models/shared/entity_abstract.dart';
 import 'package:one_study_mobile/models/tables/card_table.dart';
+import 'package:one_study_mobile/repositories/filters/cards/card_filter.dart';
 import 'package:one_study_mobile/repositories/shared/filter_builder_abstract.dart';
-import 'package:one_study_mobile/repositories/shared/sql_snippets.dart';
-
-import 'card_filter.dart';
 
 class CardFilterBuilder extends FilterBuilderAbstract {
-  List<String>? columns;
-  String? _sqlColumns = "*";
+  int? _id;
 
-  CardFilterBuilder setColumns(List<String> columns) {
-    this.columns = columns;
-    if (columns.isNotEmpty) _sqlColumns = columns.join(", ");
+  @override
+  int? get id => _id;
 
-    return this;
-  }
-
-  int? id;
-  String? _whereId;
-
+  @override
   CardFilterBuilder setId(int id) {
-    this.id = id;
-    _whereId = SqlSnippets.wherePkEquals(CardTable.instance.idColumn, id);
+    this._id = id;
 
     return this;
   }
 
-  String orderByColumn = EntityAbstract.createdAtColumn;
-  CardFilterBuilder setorderByColumn(String orderByColumn) {
-    this.orderByColumn = orderByColumn;
+  List<String>? _columns;
+
+  @override
+  List<String>? get columns => _columns;
+
+  @override
+  CardFilterBuilder setColumns(List<String> columns) {
+    this._columns = columns;
+
+    return this;
+  }
+
+  String _orderByColumn = EntityAbstract.createdAtColumn;
+
+  @override
+  String get orderByColumn => _orderByColumn;
+
+  @override
+  CardFilterBuilder setOrderByColumn(String orderByColumn) {
+    this._orderByColumn = orderByColumn;
+
+    return this;
+  }
+
+  @override
+  CardFilterBuilder setOrderBy(
+    String Function(CardTable cardTable) callback,
+  ) {
+    this._orderByColumn = callback(CardTable.instance);
+
+    return this;
+  }
+
+  int? _limit;
+
+  @override
+  int? get limit => _limit;
+
+  @override
+  CardFilterBuilder setLimit(int limit) {
+    this._limit = limit;
+    return this;
+  }
+
+  int? _offset;
+
+  @override
+  int? get offset => _offset;
+
+  @override
+  CardFilterBuilder setOffset(int offset) {
+    this._offset = offset;
     return this;
   }
 
   @override
   CardFilter build() {
-    var filter = CardFilter(this.rawQuery);
+    var filter = CardFilter(
+      this.id,
+      this.columns,
+      this.orderByColumn,
+      this.offset,
+      this.limit,
+    );
 
     return filter;
-  }
-
-  @override
-  String get rawQuery {
-    var wheres = SqlSnippets.sqlWheres(<String?>[_whereId]);
-    var orderBy = SqlSnippets.orderBy(this.orderByColumn);
-
-    var baseQuery = """
-      SELECT
-        $_sqlColumns
-      FROM
-        ${CardTable.instance.tableName}
-      $wheres
-      $orderBy
-      
-    """;
-
-    return baseQuery;
   }
 }
