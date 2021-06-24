@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:one_study_mobile/screens/play_flashcards/play_flashcards_bloc.dart';
 import 'package:one_study_mobile/screens/play_flashcards/play_flashcards_state.dart';
 import 'package:one_study_mobile/services/card_service.dart';
 class CardStackButtons extends StatelessWidget {
   const CardStackButtons({
     Key? key,
     required this.state,
-    required this.bloc,
   }) : super(key: key);
 
   final PlayFlashCardsState state;
-  final PlayFlashCardsBloc bloc;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +22,7 @@ class CardStackButtons extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () async =>
-                      await bloc.next(CardScoreFeedbackEnum.BAD),
+                      await state.next(CardScoreFeedbackEnum.BAD),
                   child: Text("Bad"),
                   style: ButtonStyle(
                     backgroundColor:
@@ -34,7 +31,7 @@ class CardStackButtons extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () async =>
-                      await bloc.next(CardScoreFeedbackEnum.GOOD),
+                      await state.next(CardScoreFeedbackEnum.GOOD),
                   child: Text("Good"),
                   style: ButtonStyle(
                     backgroundColor:
@@ -43,7 +40,7 @@ class CardStackButtons extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () async =>
-                      await bloc.next(CardScoreFeedbackEnum.GREAT),
+                      await state.next(CardScoreFeedbackEnum.GREAT),
                   child: Text("Great"),
                   style: ButtonStyle(
                     backgroundColor:
@@ -56,7 +53,7 @@ class CardStackButtons extends StatelessWidget {
           return MaterialButton(
             minWidth: double.infinity,
             color: Theme.of(context).primaryColor,
-            onPressed: bloc.flipCard,
+            onPressed: state.flipCard,
             child: Text(
               "Flip",
               style: TextStyle(

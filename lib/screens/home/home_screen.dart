@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:one_study_mobile/screens/home/home_bloc.dart';
 import 'package:one_study_mobile/screens/home/home_state.dart';
 import 'package:one_study_mobile/screens/home/widgets/speed_dial_floating_button.dart';
 import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
@@ -17,8 +16,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final state = StateProvider.of<HomeState>(context).state;
-
-    var homeBloc = new HomeBloc(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -41,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
         valueListenable: state.currentIndex,
         builder: (BuildContext context, currentIndex, _) {
           return BottomNavigationBar(
-            onTap: (index) => homeBloc.changeScreenBottomNavigation(index),
+            onTap: (index) => state.changeScreenBottomNavigation(index),
             currentIndex: currentIndex,
             elevation: 12.0,
             items: [

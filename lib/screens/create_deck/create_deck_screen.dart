@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:one_study_mobile/screens/create_deck/create_deck_bloc.dart';
 import 'package:one_study_mobile/screens/create_deck/create_deck_state.dart';
 import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
 
@@ -7,8 +6,6 @@ class CreateDeckScreen extends StatelessWidget {
   final state = new CreateDeckState();
 
   Widget build(BuildContext context) {
-    var createDeckBloc = new CreateDeckBloc(state);
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Create Decks"),
@@ -50,7 +47,7 @@ class CreateDeckScreen extends StatelessWidget {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () => createDeckBloc.submitDeck(context),
+                          onPressed: () => state.submitDeck(context),
                           child: Text("Create"),
                         )
                       ],

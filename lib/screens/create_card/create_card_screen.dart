@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
-import 'package:one_study_mobile/screens/create_card/create_card_bloc.dart';
 import 'package:one_study_mobile/screens/create_card/create_card_state.dart';
-import 'package:one_study_mobile/screens/home/home_bloc.dart';
+import 'package:one_study_mobile/screens/home/home_state.dart';
 import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
 
 import 'widget/select_decks/select_decks.dart';
@@ -9,13 +8,13 @@ import 'widget/select_decks/select_decks.dart';
 class CreateCardScreen extends StatelessWidget {
   final state = new CreateCardsState();
 
-  void initState(CreateCardsBloc createCardsBloc) {
-    createCardsBloc.queryDecks();
+  void initState() {
+    state.queryDecks();
   }
 
   @override
   Widget build(BuildContext context) {
-    var createCardsBloc = new CreateCardsBloc(state);
+    final homeState = StateProvider.of<HomeState>(context).state;
 
     return Scaffold(
       appBar: AppBar(
@@ -24,9 +23,7 @@ class CreateCardScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.home_filled),
         onPressed: () {
-          var homeBloc = HomeBloc(context);
-
-          homeBloc.changeScreenBottomNavigation(
+          homeState.changeScreenBottomNavigation(
             ListHomeScreens.PLAY_FLASHCARDS.index,
           );
 
@@ -35,7 +32,7 @@ class CreateCardScreen extends StatelessWidget {
       ),
       body: StateProvider<CreateCardsState>(
         state: state,
-        onInitState: () => initState(createCardsBloc),
+        onInitState: initState,
         child: Container(
           color: Colors.grey[200],
           child: Form(
@@ -89,7 +86,7 @@ class CreateCardScreen extends StatelessWidget {
                                 Center(
                                   child: ElevatedButton(
                                     onPressed: () =>
-                                        createCardsBloc.submitCard(context),
+                                        state.submitCard(context),
                                     child: Text("Create"),
                                   ),
                                 ),

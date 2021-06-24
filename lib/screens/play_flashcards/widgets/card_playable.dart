@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:one_study_mobile/models/card.dart' as Models;
-import 'package:one_study_mobile/screens/play_flashcards/play_flashcards_bloc.dart';
 import 'package:one_study_mobile/screens/play_flashcards/play_flashcards_state.dart';
 import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
 
@@ -30,10 +29,9 @@ class CardPlayable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = StateProvider.of<PlayFlashCardsState>(context).state;
-    final listFlashCardsBloc = PlayFlashCardsBloc(state);
 
     return GestureDetector(
-      onTap: listFlashCardsBloc.flipCard,
+      onTap: state.flipCard,
       child: ValueListenableBuilder<double>(
         valueListenable: state.angle,
         builder: (BuildContext context, angle, _) {

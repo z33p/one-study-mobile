@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:one_study_mobile/screens/home/home_bloc.dart';
 import 'package:one_study_mobile/screens/list_flashcards/list_flashcards.dart';
 import 'package:one_study_mobile/screens/play_flashcards/play_flashcards.dart';
 import 'package:one_study_mobile/screens/settings.dart';
 import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
+
+enum ListHomeScreens { LIST_FLASHCARDS, PLAY_FLASHCARDS, SETTTING_SCREEN }
 
 class HomeState extends MyState {
   ValueNotifier<int> currentIndex =
@@ -25,9 +26,14 @@ class HomeState extends MyState {
   }
 
   @override
-  HomeState createInstance() {
-    var instance = HomeState();
+  HomeState createInstance() => HomeState();
 
-    return instance;
+  changeScreenBottomNavigation(int index) {
+    currentIndex.value = index;
+
+    selectedScreen.value = listScreens[index];
+
+    isVisibleFloatingButton.value = (index == 0);
+    isDialOpen.value = false;
   }
 }

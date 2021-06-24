@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:one_study_mobile/models/deck.dart';
+import 'package:one_study_mobile/models/card.dart' as Models;
 import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
+import 'package:one_study_mobile/services/card_service.dart';
+import 'package:one_study_mobile/services/deck_service.dart';
 
 class CreateCardsState extends MyState {
+  final _deckService = DeckService();
+  final _cardService = CardService();
+
   final formKey = GlobalKey<FormState>();
 
   final inputFrontTextController = TextEditingController();
@@ -15,9 +21,32 @@ class CreateCardsState extends MyState {
   final pageViewController = PageController(initialPage: 0);
 
   @override
-  CreateCardsState createInstance() {
-    var instance = new CreateCardsState();
+  CreateCardsState createInstance() => CreateCardsState();
 
-    return instance;
+  queryDecks() async {
+    decks.value = await _deckService.getDecks();
+  }
+
+  submitCard(BuildContext context) async {
+    if (!formKey.currentState!.validate()) return;
+
+    var card = Models.Card.make(
+      front: inputFrontTextController.text,
+      back: inputBackTextController.text,
+    );
+
+    var deckSelectedIdList = decksSelectedList
+        .where((deckIdValueNotifier) => deckIdValueNotifier.value != null)
+        .map((deckIdValueNotifier) => deckIdValueNotifier.value!)
+        .toList();
+
+    await _cardService.create(card, attachDeckIdList: deckSelectedIdList);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Card created"),
+        duration: Duration(milliseconds: 2500),
+      ),
+    );
   }
 }
