@@ -12,11 +12,14 @@ class CardStack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<int>(
-      valueListenable: state.currentCardIndex,
-      builder: (BuildContext context, index, _) {
+    return StreamBuilder<int>(
+      stream: state.currentCardIndex.stream,
+      initialData: state.currentCardIndex.value,
+      builder: (BuildContext context, _) {
+        final index = state.currentCardIndex.value;
+
         return CardPlayable(
-          card: state.getInMemoryDeck().cards[index],
+          card: state.deck.getInMemorySafe().cards[index],
         );
       },
     );

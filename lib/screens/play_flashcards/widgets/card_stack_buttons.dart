@@ -13,10 +13,11 @@ class CardStackButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 16.0),
-      child: ValueListenableBuilder<bool>(
-        valueListenable: state.isFlipped,
-        builder: (BuildContext context, isFlipped, _) {
-          if (isFlipped)
+      child: StreamBuilder<bool>(
+        stream: state.isFlipped.stream,
+        initialData: state.isFlipped.value,
+        builder: (BuildContext context, _) {
+          if (state.isFlipped.value)
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

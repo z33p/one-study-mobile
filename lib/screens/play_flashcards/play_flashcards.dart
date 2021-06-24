@@ -27,10 +27,11 @@ class PlayFlashCards extends StatelessWidget {
       onInitState: initState,
       child: Padding(
         padding: EdgeInsets.all(16.0),
-        child: ValueListenableBuilder<bool>(
-          valueListenable: state.isEndOfStack,
-          builder: (BuildContext context, bool stackEnded, Widget? child) {
-            if (stackEnded)
+        child: StreamBuilder<bool>(
+          stream: state.isEndOfStack.stream,
+          initialData: state.isEndOfStack.value,
+          builder: (BuildContext context, _) {
+            if (state.isEndOfStack.value)
               return Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

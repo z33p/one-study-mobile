@@ -32,9 +32,10 @@ class CardPlayable extends StatelessWidget {
 
     return GestureDetector(
       onTap: state.flipCard,
-      child: ValueListenableBuilder<double>(
-        valueListenable: state.angle,
-        builder: (BuildContext context, angle, _) {
+      child: StreamBuilder<double>(
+        stream: state.angle.stream,
+        initialData: state.angle.value,
+        builder: (BuildContext context, _) {
           return TweenAnimationBuilder(
             tween: Tween<double>(begin: 0, end: state.angle.value),
             duration: Duration(milliseconds: 700),

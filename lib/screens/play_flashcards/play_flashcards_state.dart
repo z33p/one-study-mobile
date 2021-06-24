@@ -1,53 +1,48 @@
+import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:one_study_mobile/models/deck.dart';
+import 'package:one_study_mobile/screens/shared/one_study_bloc.dart';
 import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
 import 'package:one_study_mobile/services/card_service.dart';
 import 'package:one_study_mobile/services/deck_service.dart';
 
 class PlayFlashCardsState extends MyState {
-  final deck = ValueNotifier<Deck?>(null);
+  final _cardService = new CardService();
+  final _deckService = new DeckService();
 
-  final isEndOfStack = ValueNotifier<bool>(true);
+  final deck = _DeckBloc();
 
-  final isFlipped = ValueNotifier<bool>(false);
-  final angle = ValueNotifier<double>(0.0);
+  final isEndOfStack = OneStudyBloc<bool>(true);
+  final isFlipped = OneStudyBloc<bool>(false);
 
-  final currentCardIndex = ValueNotifier<int>(0);
+  final angle = OneStudyBloc<double>(0.0);
+
+  final currentCardIndex = OneStudyBloc<int>(0);
 
   @override
   PlayFlashCardsState createInstance() => new PlayFlashCardsState();
 
-  var _cardService = new CardService();
-  final _deckService = new DeckService();
-
   unFlipCard() {
-    isFlipped.value = false;
-    angle.value = 0.0;
+    isFlipped.setValue(false);
+    angle.setValue(0.0);
   }
 
   flipCard() {
-    isFlipped.value = !isFlipped.value;
-    angle.value = (angle.value + pi) % (2 * pi);
+    isFlipped.setValue(!isFlipped.value);
+    angle.setValue((angle.value + pi) % (2 * pi));
   }
 
   setIsEndOfStack(bool isEndOfStack) {
-    if (isEndOfStack) currentCardIndex.value = 0;
+    if (isEndOfStack) currentCardIndex.setValue(0);
 
-    this.isEndOfStack.value = isEndOfStack;
-  }
-
-  Deck getInMemoryDeck() {
-    if (deck.value != null) return deck.value!;
-
-    throw Exception("In Memory Deck doesn't exist");
+    this.isEndOfStack.setValue(isEndOfStack);
   }
 
   generateInMemoryDeck() async {
     var deck = await _deckService.generateInMemoryDeck();
 
-    this.deck.value = deck;
+    this.deck.setValue(deck);
 
     if (deck.cards.length > 0) setIsEndOfStack(false);
 
@@ -55,18 +50,20 @@ class PlayFlashCardsState extends MyState {
   }
 
   previous() {
-    final deck = getInMemoryDeck();
-
+    final deck = this.deck.getInMemorySafe();
+  
     if ((deck.cards.length - 1) == currentCardIndex.value) {
       setIsEndOfStack(false);
-      currentCardIndex.value--;
-    } else if (currentCardIndex.value > 0) currentCardIndex.value--;
+      currentCardIndex.setValue(currentCardIndex.value - 1);
+    } else if (currentCardIndex.value > 0) {
+      currentCardIndex.setValue(currentCardIndex.value - 1);
+    }
   }
 
   next(CardScoreFeedbackEnum cardScoreFeedback) async {
     unFlipCard();
 
-    final deck = getInMemoryDeck();
+    final deck = this.deck.getInMemorySafe();
     final index = currentCardIndex.value;
 
     await _cardService.setCardScore(
@@ -75,8 +72,31 @@ class PlayFlashCardsState extends MyState {
     );
 
     if ((deck.cards.length - 1) != index)
-      currentCardIndex.value = index + 1;
+      currentCardIndex.setValue(currentCardIndex.value + 1);
     else
       setIsEndOfStack(true);
+  }
+}
+
+class _DeckBloc implements OneStudyBloc<Deck?> {
+  Deck? _deck;
+
+  @override
+  get value => _deck;
+
+  Deck getInMemorySafe() {
+    if (_deck == null) throw Exception("In memory deck is null");
+
+    return _deck!;
+  }
+
+  final _deckStreamController = StreamController<Deck?>.broadcast();
+
+  @override
+  Stream<Deck?> get stream => _deckStreamController.stream;
+
+  @override
+  void setValue(value) {
+    _deck = value;
   }
 }
