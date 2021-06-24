@@ -11,8 +11,11 @@ class CardTable implements DbTableAbstract {
   final String tableName = "cards";
 
   final String idColumn = "card_id";
+
   final String frontColumn = "front";
   final String backColumn = "back";
+
+  final String scoreColumn = "score";
 
   @override
   Future<void> createTable(Database db) async {
@@ -21,6 +24,9 @@ class CardTable implements DbTableAbstract {
         $idColumn INTEGER PRIMARY KEY
         , $frontColumn TEXT
         , $backColumn TEXT
+
+        , $scoreColumn REAL
+
         ${EntityAbstract.entityColumnsSql}
       )
     """);

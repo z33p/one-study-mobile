@@ -7,10 +7,13 @@ class Card extends EntityAbstract {
   final String front;
   final String back;
 
+  double score = 0.5;
+
   Card({
     required this.cardId,
     required this.front,
     required this.back,
+    required this.score,
     required createdAt,
     required updatedAt,
   }) : super(createdAt, updatedAt);
@@ -26,6 +29,7 @@ class Card extends EntityAbstract {
       cardId: cardMap[cardTable.idColumn],
       front: cardMap[cardTable.frontColumn],
       back: cardMap[cardTable.backColumn],
+      score: cardMap[cardTable.scoreColumn],
       createdAt: DateTime.parse(cardMap[EntityAbstract.createdAtColumn]),
       updatedAt: DateTime.parse(cardMap[EntityAbstract.updatedAtColumn]),
     );
@@ -34,7 +38,7 @@ class Card extends EntityAbstract {
   }
 
   static List<Card> fromMapList(List<Map<String, dynamic>> cardsMap) {
-    var cards = cardsMap.map((p) => fromMap(p)).toList();
+    var cards = cardsMap.map((c) => fromMap(c)).toList();
 
     return cards;
   }
@@ -43,8 +47,11 @@ class Card extends EntityAbstract {
     var cardMap = EntityAbstract.entityToMap(this);
 
     cardMap[dbTable.idColumn] = this.cardId;
+
     cardMap[dbTable.frontColumn] = this.front;
     cardMap[dbTable.backColumn] = this.back;
+
+    cardMap[dbTable.scoreColumn] = this.score;
 
     return cardMap;
   }
