@@ -40,17 +40,17 @@ class Repository {
     return id;
   }
 
-  void update<E extends EntityAbstract>(E updatedEntity) async {
+  Future<void> update<E extends EntityAbstract>(E updatedEntity) async {
     var updatedEntityMap = updatedEntity.toMap();
 
-    dbInstance.update(
+    await dbInstance.update(
       updatedEntity.dbTable.tableName,
       updatedEntityMap,
       where: SqlSnippets.whereEntityPkEquals(updatedEntity),
     );
   }
 
-  void delete<E extends EntityAbstract>(E entity) async {
+  Future<void> delete<E extends EntityAbstract>(E entity) async {
     await dbInstance.delete(
       entity.dbTable.tableName,
       where: SqlSnippets.whereEntityPkEquals(entity),

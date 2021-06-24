@@ -1,4 +1,6 @@
+import 'package:one_study_mobile/models/card.dart';
 import 'package:one_study_mobile/models/deck.dart';
+import 'package:one_study_mobile/repositories/filters/cards/card_filter_builder.dart';
 import 'package:one_study_mobile/repositories/filters/decks/deck_filter.dart';
 import 'package:one_study_mobile/repositories/filters/decks/deck_filter_builder.dart';
 
@@ -18,14 +20,30 @@ class DeckService extends ServiceAbstract {
       deckFilter = DeckFilterBuilder().build();
     }
 
-    var decksMap = await repository.findBy(filter: deckFilter);
-
-    var decks = Deck.fromMapList(decksMap);
+    var decks = await repository.findByMapped(
+      filter: deckFilter,
+      mapFunction: Deck.fromMapList,
+    );
 
     return decks;
   }
 
   Future<void> create(Deck deck) async {
     await repository.insert(deck);
+  }
+
+  Future<Deck> generateInMemoryDeck() async {
+    var cards = await repository.findByMapped(
+      filter: CardFilterBuilder().setOrderBy((c) => c.scoreColumn).build(),
+      mapFunction: Card.fromMapList,
+    );
+
+    var deck = Deck.make(
+      title: "In Memory",
+      description: "Deck in memory",
+      cards: cards,
+    );
+
+    return deck;
   }
 }

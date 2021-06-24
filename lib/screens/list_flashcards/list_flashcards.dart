@@ -26,7 +26,14 @@ class ListFlashCards extends StatelessWidget {
             ...cards
                 .map((card) => ListTile(
                       title: Text(card.front),
-                      subtitle: Text(card.back),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(card.back),
+                          Text("Score: ${card.score}")
+                        ],
+                      ),
+                      isThreeLine: true,
                     ))
                 .toList(),
           ],

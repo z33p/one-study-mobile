@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one_study_mobile/screens/home/home_bloc.dart';
 import 'package:one_study_mobile/screens/list_flashcards/list_flashcards.dart';
-import 'package:one_study_mobile/screens/play_flashcards.dart';
+import 'package:one_study_mobile/screens/play_flashcards/play_flashcards.dart';
 import 'package:one_study_mobile/screens/settings.dart';
 import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
 

@@ -1,0 +1,72 @@
+import 'package:flutter/material.dart';
+import 'package:one_study_mobile/screens/play_flashcards/play_flashcards_bloc.dart';
+import 'package:one_study_mobile/screens/play_flashcards/play_flashcards_state.dart';
+import 'package:one_study_mobile/services/card_service.dart';
+class CardStackButtons extends StatelessWidget {
+  const CardStackButtons({
+    Key? key,
+    required this.state,
+    required this.bloc,
+  }) : super(key: key);
+
+  final PlayFlashCardsState state;
+  final PlayFlashCardsBloc bloc;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16.0),
+      child: ValueListenableBuilder<bool>(
+        valueListenable: state.isFlipped,
+        builder: (BuildContext context, isFlipped, _) {
+          if (isFlipped)
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                  onPressed: () async =>
+                      await bloc.next(CardScoreFeedbackEnum.BAD),
+                  child: Text("Bad"),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.red),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () async =>
+                      await bloc.next(CardScoreFeedbackEnum.GOOD),
+                  child: Text("Good"),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.green),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () async =>
+                      await bloc.next(CardScoreFeedbackEnum.GREAT),
+                  child: Text("Great"),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.blue),
+                  ),
+                ),
+              ],
+            );
+
+          return MaterialButton(
+            minWidth: double.infinity,
+            color: Theme.of(context).primaryColor,
+            onPressed: bloc.flipCard,
+            child: Text(
+              "Flip",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}

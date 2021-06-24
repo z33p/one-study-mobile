@@ -5,6 +5,8 @@ import 'package:one_study_mobile/repositories/filters/cards/card_filter_builder.
 
 import 'shared/service_abstract.dart';
 
+enum CardScoreFeedbackEnum { BAD, GOOD, GREAT }
+
 class CardService extends ServiceAbstract {
   static final CardService _cardService = CardService._internal();
 
@@ -15,8 +17,7 @@ class CardService extends ServiceAbstract {
   CardService._internal();
 
   Future<List<Card>> getCards({CardFilter? cardFilter}) async {
-    if (cardFilter == null)
-      cardFilter = CardFilterBuilder().build();
+    if (cardFilter == null) cardFilter = CardFilterBuilder().build();
 
     var cards = await repository.findByMapped(
       filter: cardFilter,
@@ -37,5 +38,27 @@ class CardService extends ServiceAbstract {
       entity: card,
       attachIdList: attachDeckIdList,
     );
+  }
+
+  Future<void> setCardScore(
+    CardScoreFeedbackEnum cardScoreFeedback,
+    Card card,
+  ) async {
+    switch (cardScoreFeedback) {
+      case CardScoreFeedbackEnum.BAD:
+        var result = card.score * 0.95;
+        card.setScore(result);
+        break;
+
+      case CardScoreFeedbackEnum.GOOD:
+        card.setScore(card.score * 1.1);
+        break;
+
+      default:
+        // GREAT
+        card.setScore(card.score * 1.2);
+    }
+
+    await repository.update(card);
   }
 }

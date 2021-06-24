@@ -7,16 +7,31 @@ class Card extends EntityAbstract {
   final String front;
   final String back;
 
-  double score = 0.5;
+  final _minScore = 0.001;
+  final _maxScore = 1.0;
+
+  double _score = 0.5;
+
+  double get score => _score;
+
+  setScore(double score) {
+    if (score > _maxScore)
+      score = _maxScore;
+    else if (score < _minScore) score = _minScore;
+
+    _score = score;
+  }
 
   Card({
     required this.cardId,
     required this.front,
     required this.back,
-    required this.score,
+    required score,
     required createdAt,
     required updatedAt,
-  }) : super(createdAt, updatedAt);
+  }) : super(createdAt, updatedAt) {
+    _score = score;
+  }
 
   Card.make({required this.front, required this.back, score}) : super.make();
 
