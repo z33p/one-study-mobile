@@ -33,6 +33,8 @@ class PlayFlashCardsState extends MyState {
   }
 
   setIsEndOfStack(bool isEndOfStack) {
+    if (isEndOfStack) currentCardIndex.value = 0;
+
     this.isEndOfStack.value = isEndOfStack;
   }
 
