@@ -7,8 +7,8 @@ class Card extends EntityAbstract {
   final String front;
   final String back;
 
-  final _minScore = 0.001;
-  final _maxScore = 1.0;
+  final _maxScore = 10.0;
+  final _minScore = 0.01;
 
   double _score = 0.5;
 

@@ -28,7 +28,15 @@ class ListFlashCards extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(card.back),
-                          Text("Score: ${card.score}")
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                "Score: ${card.score.toStringAsFixed(2)}",
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                       isThreeLine: true,
