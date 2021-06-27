@@ -98,5 +98,6 @@ class _DeckBloc implements OneStudyBloc<Deck?> {
   @override
   void setValue(value) {
     _deck = value;
+    _deckStreamController.add(value);
   }
 }
