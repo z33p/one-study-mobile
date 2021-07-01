@@ -34,4 +34,12 @@ class SqlSnippets {
 
     return orderBy;
   }
+
+  static String getSqlColumns(List<String>? columns) {
+    String? sqlColumns = "*";
+
+    if (columns != null && columns.isNotEmpty) sqlColumns = columns.join(", ");
+
+    return sqlColumns;
+  }
 }
