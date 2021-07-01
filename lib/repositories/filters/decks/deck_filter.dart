@@ -1,5 +1,5 @@
-import 'package:one_study_mobile/models/tables/deck_table.dart';
-import 'package:one_study_mobile/repositories/shared/filter_abstract.dart';
+import 'package:one_study/models/tables/deck_table.dart';
+import 'package:one_study/repositories/shared/filter_abstract.dart';
 
 class DeckFilter extends FilterAbstract {
   DeckFilter(

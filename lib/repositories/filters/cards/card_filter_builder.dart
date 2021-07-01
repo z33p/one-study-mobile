@@ -1,6 +1,6 @@
-import 'package:one_study_mobile/models/tables/card_table.dart';
-import 'package:one_study_mobile/repositories/filters/cards/card_filter.dart';
-import 'package:one_study_mobile/repositories/shared/filter_builder_abstract.dart';
+import 'package:one_study/models/tables/card_table.dart';
+import 'package:one_study/repositories/filters/cards/card_filter.dart';
+import 'package:one_study/repositories/shared/filter_builder_abstract.dart';
 
 class CardFilterBuilder extends FilterBuilderAbstract<CardFilterBuilder> {
   CardFilterBuilder() {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:one_study_mobile/models/deck.dart';
-import 'package:one_study_mobile/screens/create_card/create_card_state.dart';
-import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
+import 'package:one_study/models/deck.dart';
+import 'package:one_study/screens/create_card/create_card_state.dart';
+import 'package:one_study/screens/shared/custom_providers/state_provider.dart';
 
 import 'deck_chip.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_study_mobile/screens/home/home_state.dart';
+import 'package:one_study/screens/home/home_state.dart';
 
 import 'screens/home/home_screen.dart';
 import 'screens/shared/custom_providers/state_provider.dart';

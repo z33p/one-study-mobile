@@ -1,6 +1,6 @@
-import 'package:one_study_mobile/database/my_database.dart';
-import 'package:one_study_mobile/models/shared/entity_abstract.dart';
-import 'package:one_study_mobile/models/shared/pivot_table_abstract.dart';
+import 'package:one_study/database/my_database.dart';
+import 'package:one_study/models/shared/entity_abstract.dart';
+import 'package:one_study/models/shared/pivot_table_abstract.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'shared/filter_abstract.dart';

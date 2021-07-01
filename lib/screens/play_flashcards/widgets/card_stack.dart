@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:one_study_mobile/screens/play_flashcards/play_flashcards_state.dart';
-import 'package:one_study_mobile/screens/play_flashcards/widgets/card_playable.dart';
+import 'package:one_study/screens/play_flashcards/play_flashcards_state.dart';
+import 'package:one_study/screens/play_flashcards/widgets/card_playable.dart';
 
 class CardStack extends StatelessWidget {
   const CardStack({

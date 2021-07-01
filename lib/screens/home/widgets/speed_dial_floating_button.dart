@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:one_study_mobile/screens/create_card/create_card_screen.dart';
-import 'package:one_study_mobile/screens/create_deck/create_deck_screen.dart';
+import 'package:one_study/screens/create_card/create_card_screen.dart';
+import 'package:one_study/screens/create_deck/create_deck_screen.dart';
 
 class SpeedDialFloatingButton extends StatelessWidget {
   final bool visible;

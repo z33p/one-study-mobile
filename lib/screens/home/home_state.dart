@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:one_study_mobile/screens/list_flashcards/list_flashcards.dart';
-import 'package:one_study_mobile/screens/play_flashcards/play_flashcards.dart';
-import 'package:one_study_mobile/screens/settings.dart';
-import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
+import 'package:one_study/screens/list_flashcards/list_flashcards.dart';
+import 'package:one_study/screens/play_flashcards/play_flashcards.dart';
+import 'package:one_study/screens/settings.dart';
+import 'package:one_study/screens/shared/custom_providers/state_provider.dart';
 
 enum ListHomeScreens { LIST_FLASHCARDS, PLAY_FLASHCARDS, SETTTING_SCREEN }
 

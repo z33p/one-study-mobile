@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:one_study_mobile/screens/play_flashcards/play_flashcards_state.dart';
-import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
+import 'package:one_study/screens/play_flashcards/play_flashcards_state.dart';
+import 'package:one_study/screens/shared/custom_providers/state_provider.dart';
 
 import 'widgets/card_stack.dart';
 import 'widgets/card_stack_buttons.dart';

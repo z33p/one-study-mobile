@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:one_study_mobile/models/card.dart' as Models;
-import 'package:one_study_mobile/screens/play_flashcards/play_flashcards_state.dart';
-import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
+import 'package:one_study/models/card.dart' as Models;
+import 'package:one_study/screens/play_flashcards/play_flashcards_state.dart';
+import 'package:one_study/screens/shared/custom_providers/state_provider.dart';
 
 class CardPlayable extends StatelessWidget {
   CardPlayable({

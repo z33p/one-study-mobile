@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:one_study_mobile/models/deck.dart';
-import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
-import 'package:one_study_mobile/services/deck_service.dart';
+import 'package:one_study/models/deck.dart';
+import 'package:one_study/screens/shared/custom_providers/state_provider.dart';
+import 'package:one_study/services/deck_service.dart';
 
 class CreateDeckState extends MyState {
     final _deckService = DeckService();

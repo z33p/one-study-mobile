@@ -1,1 +1,1 @@
-# one_study_mobile
+# one_study

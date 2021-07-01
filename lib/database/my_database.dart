@@ -1,6 +1,6 @@
-import 'package:one_study_mobile/models/tables/card_deck_table.dart';
-import 'package:one_study_mobile/models/tables/card_table.dart';
-import 'package:one_study_mobile/models/tables/deck_table.dart';
+import 'package:one_study/models/tables/card_deck_table.dart';
+import 'package:one_study/models/tables/card_table.dart';
+import 'package:one_study/models/tables/deck_table.dart';
 import "package:path/path.dart";
 import 'package:sqflite/sqflite.dart';
 

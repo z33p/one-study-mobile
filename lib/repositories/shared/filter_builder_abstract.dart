@@ -1,5 +1,5 @@
-import 'package:one_study_mobile/models/shared/entity_abstract.dart';
-import 'package:one_study_mobile/repositories/shared/filter_abstract.dart';
+import 'package:one_study/models/shared/entity_abstract.dart';
+import 'package:one_study/repositories/shared/filter_abstract.dart';
 
 abstract class FilterBuilderAbstract<F extends FilterBuilderAbstract<F>> {
   F? _instance;

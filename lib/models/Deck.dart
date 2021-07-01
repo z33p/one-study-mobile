@@ -1,6 +1,6 @@
-import 'package:one_study_mobile/models/card.dart';
-import 'package:one_study_mobile/models/shared/entity_abstract.dart';
-import 'package:one_study_mobile/models/tables/deck_table.dart';
+import 'package:one_study/models/card.dart';
+import 'package:one_study/models/shared/entity_abstract.dart';
+import 'package:one_study/models/tables/deck_table.dart';
 
 class Deck extends EntityAbstract {
   int? deckId;

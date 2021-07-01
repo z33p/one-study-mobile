@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:one_study_mobile/models/deck.dart';
-import 'package:one_study_mobile/screens/shared/one_study_bloc.dart';
-import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
-import 'package:one_study_mobile/services/card_service.dart';
-import 'package:one_study_mobile/services/deck_service.dart';
+import 'package:one_study/models/deck.dart';
+import 'package:one_study/screens/shared/one_study_bloc.dart';
+import 'package:one_study/screens/shared/custom_providers/state_provider.dart';
+import 'package:one_study/services/card_service.dart';
+import 'package:one_study/services/deck_service.dart';
 
 class PlayFlashCardsState extends MyState {
   final _cardService = new CardService();

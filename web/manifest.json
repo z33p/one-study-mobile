@@ -1,6 +1,6 @@
 {
-    "name": "one_study_mobile",
-    "short_name": "one_study_mobile",
+    "name": "one_study",
+    "short_name": "one_study",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

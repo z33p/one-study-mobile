@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:one_study_mobile/models/card.dart';
-import 'package:one_study_mobile/screens/shared/custom_providers/state_provider.dart';
-import 'package:one_study_mobile/services/card_service.dart';
+import 'package:one_study/models/card.dart';
+import 'package:one_study/screens/shared/custom_providers/state_provider.dart';
+import 'package:one_study/services/card_service.dart';
 
 class ListFlashCardsState extends MyState {
   final _cardService = CardService();

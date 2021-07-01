@@ -1,4 +1,4 @@
-import 'package:one_study_mobile/models/shared/entity_abstract.dart';
+import 'package:one_study/models/shared/entity_abstract.dart';
 
 class SqlSnippets {
   static String sqlWheres(List<String?> sqlWheresList) {

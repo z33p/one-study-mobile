@@ -1,4 +1,4 @@
-import 'package:one_study_mobile/models/shared/pivot_table_abstract.dart';
+import 'package:one_study/models/shared/pivot_table_abstract.dart';
 
 import 'card_table.dart';
 import 'deck_table.dart';

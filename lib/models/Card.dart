@@ -1,5 +1,5 @@
-import 'package:one_study_mobile/models/shared/entity_abstract.dart';
-import 'package:one_study_mobile/models/tables/card_table.dart';
+import 'package:one_study/models/shared/entity_abstract.dart';
+import 'package:one_study/models/tables/card_table.dart';
 
 class Card extends EntityAbstract {
   int? cardId;

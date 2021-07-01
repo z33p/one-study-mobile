@@ -1,5 +1,5 @@
-import 'package:one_study_mobile/models/shared/db_table_abstract.dart';
-import 'package:one_study_mobile/models/shared/entity_abstract.dart';
+import 'package:one_study/models/shared/db_table_abstract.dart';
+import 'package:one_study/models/shared/entity_abstract.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DeckTable implements DbTableAbstract {

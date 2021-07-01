@@ -1,5 +1,5 @@
-import 'package:one_study_mobile/models/shared/db_table_abstract.dart';
-import 'package:one_study_mobile/repositories/shared/sql_snippets.dart';
+import 'package:one_study/models/shared/db_table_abstract.dart';
+import 'package:one_study/repositories/shared/sql_snippets.dart';
 
 abstract class FilterAbstract {
   int? _id;

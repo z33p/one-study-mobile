@@ -1,8 +1,8 @@
-import 'package:one_study_mobile/models/card.dart';
-import 'package:one_study_mobile/models/deck.dart';
-import 'package:one_study_mobile/repositories/filters/cards/card_filter_builder.dart';
-import 'package:one_study_mobile/repositories/filters/decks/deck_filter.dart';
-import 'package:one_study_mobile/repositories/filters/decks/deck_filter_builder.dart';
+import 'package:one_study/models/card.dart';
+import 'package:one_study/models/deck.dart';
+import 'package:one_study/repositories/filters/cards/card_filter_builder.dart';
+import 'package:one_study/repositories/filters/decks/deck_filter.dart';
+import 'package:one_study/repositories/filters/decks/deck_filter_builder.dart';
 
 import 'shared/service_abstract.dart';
 

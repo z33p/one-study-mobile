@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:one_study_mobile/screens/play_flashcards/play_flashcards_state.dart';
-import 'package:one_study_mobile/services/card_service.dart';
+import 'package:one_study/screens/play_flashcards/play_flashcards_state.dart';
+import 'package:one_study/services/card_service.dart';
 class CardStackButtons extends StatelessWidget {
   const CardStackButtons({
     Key? key,

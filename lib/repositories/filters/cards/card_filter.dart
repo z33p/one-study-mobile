@@ -1,5 +1,5 @@
-import 'package:one_study_mobile/models/tables/card_table.dart';
-import 'package:one_study_mobile/repositories/shared/filter_abstract.dart';
+import 'package:one_study/models/tables/card_table.dart';
+import 'package:one_study/repositories/shared/filter_abstract.dart';
 class CardFilter extends FilterAbstract {
   CardFilter(
     int? id,
