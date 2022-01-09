@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_study/screens/home/home_state.dart';
+import 'package:one_study/screens/home/home_screen_state.dart';
 import 'package:one_study/screens/home/widgets/speed_dial_floating_button.dart';
 import 'package:one_study/screens/shared/custom_providers/state_provider.dart';
 
@@ -15,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final state = StateProvider.of<HomeState>(context).state;
+    final state = StateProvider.of<HomeScreenState>(context).state;
 
     return Scaffold(
       appBar: AppBar(

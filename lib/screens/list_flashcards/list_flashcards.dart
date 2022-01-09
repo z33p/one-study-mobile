@@ -13,7 +13,6 @@ class ListFlashCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return StateProvider<ListFlashCardsState>(
       state: state,
       onInitState: initState,

@@ -16,7 +16,7 @@ class CreateCardsState extends MyState {
 
   final ValueNotifier<List<Deck>> decks = ValueNotifier(<Deck>[]);
 
-  List<ValueNotifier<int?>> decksSelectedList = <ValueNotifier<int?>>[];
+  ValueNotifier<Deck?> deckSelected = ValueNotifier<Deck?>(null);
 
   final pageViewController = PageController(initialPage: 0);
 
@@ -35,12 +35,12 @@ class CreateCardsState extends MyState {
       back: inputBackTextController.text,
     );
 
-    var deckSelectedIdList = decksSelectedList
-        .where((deckIdValueNotifier) => deckIdValueNotifier.value != null)
-        .map((deckIdValueNotifier) => deckIdValueNotifier.value!)
-        .toList();
+    assert(deckSelected.value != null);
 
-    await _cardService.create(card, attachDeckIdList: deckSelectedIdList);
+    await _cardService.create(
+      card,
+      attachDeckIdList: <int>[deckSelected.value!.deckId!],
+    );
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
